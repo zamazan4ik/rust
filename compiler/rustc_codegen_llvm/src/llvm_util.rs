@@ -116,6 +116,10 @@ unsafe fn configure_llvm(sess: &Session) {
             add("-enable-emscripten-cxx-exceptions", false);
         }
 
+        if sess.opts.unstable_opts.profile_sample_use.is_some() {
+            add("-sample-profile-use-profi", false);
+        }
+
         // HACK(eddyb) LLVM inserts `llvm.assume` calls to preserve align attributes
         // during inlining. Unfortunately these may block other optimizations.
         add("-preserve-alignment-assumptions-during-inlining=false", false);
